@@ -21,7 +21,6 @@ class DishdetailComponent extends Component{
     }
     render(){
         if(this.props.dish != null){
-            {console.log(this.props.dish.comments)}
             const comments = this.props.dish.comments.map((comment) => {
                 return (
                     <><br/>
@@ -31,19 +30,21 @@ class DishdetailComponent extends Component{
                 )
             })
             return(
-                <div className='row'>
-                    <div className='col-12 col-md-5 m-1'>
-                        <Card>
-                            <CardImg top src={this.props.dish.image} alt={this.props.dish.name} />
-                            <CardBody>
-                            <CardTitle><b>{this.props.dish.name}</b></CardTitle>
-                            <CardText>{this.props.dish.description}</CardText>
-                            </CardBody>
-                        </Card>
-                    </div>
-                    <div className='col-12 col-md-5 m-1'>
-                        <b>Comments</b>
-                        {comments}
+                <div className='container'>
+                    <div className='row'>
+                        <div className='col-12 col-md-5 m-1'>
+                            <Card>
+                                <CardImg top src={this.props.dish.image} alt={this.props.dish.name} />
+                                <CardBody>
+                                <CardTitle><b>{this.props.dish.name}</b></CardTitle>
+                                <CardText>{this.props.dish.description}</CardText>
+                                </CardBody>
+                            </Card>
+                        </div>
+                        <div className='col-12 col-md-5 m-1'>
+                            <b>Comments</b>
+                            {comments}
+                        </div>
                     </div>
                 </div>
             )
