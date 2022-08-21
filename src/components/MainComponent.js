@@ -21,29 +21,20 @@ class Main extends Component{
       };
     }
     render(){
-        const LoadComponent = (arg1, component) => {
+        const LoadHome = (arg1) => {
             //posting arg1 as an example of whatever you are wanting to do.
-            console.log(arg1);
-            return component;
+                return <Home 
+                    dish={this.state.dishes.filter((dish) => dish.featured)[0]} 
+                    promotion={this.state.promotions.filter((promotion) => promotion.featured)[0]}
+                    leader={this.state.leaders.filter((leader) => leader.featured)[0]}
+                    />;
           };
         return(
             <div>
             <Header/>
             <Routes>
-                <Route path="/home" element={
-                    <Home 
-                    dish={this.state.dishes.filter((dish) => dish.featured)[0]} 
-                    promotion={this.state.promotions.filter((promotion) => promotion.featured)[0]}
-                    leader={this.state.leaders.filter((leader) => leader.featured)[0]}
-                    />
-                } />  
-                <Route path="/" element={
-                    <Home 
-                    dish={this.state.dishes.filter((dish) => dish.featured)[0]} 
-                    promotion={this.state.promotions.filter((promotion) => promotion.featured)[0]}
-                    leader={this.state.leaders.filter((leader) => leader.featured)[0]}
-                    />
-                } />  
+                <Route path="/home" element={LoadHome('Home')} />  
+                <Route path="*" element={LoadHome('Home')} />
                 <Route exact path='/menu' element={<Menu dishes={this.state.dishes} />} />
                 <Route exact path='/contactus' element={<Contact/>} />
             </Routes>
