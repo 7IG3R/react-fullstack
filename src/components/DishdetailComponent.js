@@ -1,5 +1,6 @@
-import React from 'react';
-import { Card, CardBody, CardImg, CardText, CardTitle } from 'reactstrap';
+import React, { useEffect } from 'react';
+import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardImg, CardText, CardTitle } from 'reactstrap';
+import {Link, useParams} from 'react-router-dom';
 
 function convertDate(date){
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -37,17 +38,32 @@ function RenderDish({dish}){
     )
 }
 
-const DishDetail = ({dish}) => {
+const DishDetail = (props) => {
+    let {dishId} = useParams();
+    console.log(dishId)
+    const dish = props.dishes.filter((dish) => dish.id == dishId)[0]
+    const comment = props.comments.filter((comment) => comment.dishId  == dishId)
+    console.log(dish)
     if(dish != null){
         return(
             <div className='container'>
+                <div className='row'>
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to={`/menu`}>Menu</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>{dish.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className='col-12'>
+                        <h3>{dish.name}</h3>
+                    </div>
+                </div>
                 <div className='row'>
                     <div className='col-12 col-md-5 m-1'>
                         <RenderDish dish = {dish}/>
                     </div>
                     <div className='col-12 col-md-5 m-1'>
                         <b>Comments</b>
-                        <RenderComments comments = {dish.comments}/>
+                        <RenderComments comments = {comment}/>
                     </div>
                 </div>
             </div>

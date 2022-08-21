@@ -1,5 +1,5 @@
-import { Component } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Component, useEffect } from 'react';
+import { Navigate, Route, Routes, useParams } from 'react-router-dom';
 import { DISHES } from '../shared/dishes';
 import { COMMENTS } from '../shared/comments';
 import { LEADERS } from '../shared/leaders';
@@ -9,6 +9,7 @@ import Header from './HeaderComponent';
 import Home from './HomeComponent';
 import Menu from './MenuComponent';
 import Contact from './ContactComponent';
+import DishDetail from './DishdetailComponent';
 class Main extends Component{
     
     constructor(props){
@@ -22,20 +23,26 @@ class Main extends Component{
     }
     render(){
         const LoadHome = (arg1) => {
-            //posting arg1 as an example of whatever you are wanting to do.
                 return <Home 
                     dish={this.state.dishes.filter((dish) => dish.featured)[0]} 
                     promotion={this.state.promotions.filter((promotion) => promotion.featured)[0]}
                     leader={this.state.leaders.filter((leader) => leader.featured)[0]}
                     />;
           };
+        const LoadDish = ({match}) =>{
+            return <DishDetail 
+                dish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10)[0])}
+                comments = {this.state.comments.filter((comment) => comment.dishId  === parseInt(match.params.dishId,10))}
+                />;
+        }
         return(
             <div>
             <Header/>
             <Routes>
-                <Route path="/home" element={LoadHome('Home')} />  
+                <Route exact path="/home" element={LoadHome('Home')} />  
                 <Route path="*" element={LoadHome('Home')} />
                 <Route exact path='/menu' element={<Menu dishes={this.state.dishes} />} />
+                <Route path='/menu/:dishId' element={<DishDetail dishes ={this.state.dishes} comments={this.state.comments}/>}></Route>
                 <Route exact path='/contactus' element={<Contact/>} />
             </Routes>
             <Footer/>
