@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardImg, CardText, CardTitle } from 'reactstrap';
-import {Link, useParams} from 'react-router-dom';
 
 function convertDate(date){
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];

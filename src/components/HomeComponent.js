@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle} from 'reactstrap';
 
@@ -18,17 +19,21 @@ function RenderCard({item}) {
 }
 
 function Home(props) {
+    const dish= props.dishes.filter((dish) => dish.featured)[0]
+    const promotion = props.promotions.filter((promotion) => promotion.featured)[0]
+    const leader = props.leaders.filter((leader) => leader.featured)[0]
+
     return(
         <div className="container">
             <div className="row align-items-start">
                 <div className="col-12 col-md m-1">
-                    <RenderCard item={props.dish} />
+                    <RenderCard item={dish} />
                 </div>
                 <div className="col-12 col-md m-1">
-                    <RenderCard item={props.promotion} />
+                    <RenderCard item={promotion} />
                 </div>
                 <div className="col-12 col-md m-1">
-                    <RenderCard item={props.leader} />
+                    <RenderCard item={leader} />
                 </div>
             </div>
         </div>
