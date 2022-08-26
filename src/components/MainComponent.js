@@ -8,7 +8,7 @@ import Footer from './FooterComponent';
 import Header from './HeaderComponent';
 import Home from './HomeComponent';
 import Menu from './MenuComponent';
-
+import { addComment } from '../redux/ActionCreators';
 
 // Creating a WithRouter with new functions as it is not supported in latest React Router Dom
 const withRouter = (Component) => {
@@ -27,6 +27,9 @@ const withRouter = (Component) => {
     return ComponentWithRouterProp;
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment))
+})
 // Redux Function to map State as props
 const mapStateToProps = (state) => {
     return{
@@ -51,7 +54,7 @@ class Main extends Component{
                 <Route path="*" element={<Home dishes = {this.props.dishes} leaders = {this.props.leaders} promotions = {this.props.promotions} />}/>
                 <Route exact path='/menu' element={<Menu dishes={this.props.dishes} />} />
                 <Route exact path='/aboutus' element={<About leaders={this.props.leaders} />} />
-                <Route path='/menu/:dishId' element={<DishDetail dishes ={this.props.dishes} comments={this.props.comments}/>}></Route>
+                <Route path='/menu/:dishId' element={<DishDetail dishes ={this.props.dishes} addComment={this.props.addComment} comments={this.props.comments}/>}></Route>
                 <Route exact path='/contactus' element={<Contact/>} />
             </Routes>
             <Footer/>
@@ -62,4 +65,4 @@ class Main extends Component{
 }
 
 // Redux way to wrap component so that it uses state with props
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Main));

@@ -22,14 +22,13 @@ class CommentForm extends Component {
       this.setState({ isModalOpen: !this.state.isModalOpen });
    }
    handleSubmit(values) {
-      console.log("Current State is: " + JSON.stringify(values));
-      alert("Current State is: " + JSON.stringify(values));
+      this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
       this.toggleModal();
    }
    render() {
       return(
          <div className="container">
-            <div className="row">
+            <div className="row mt-4 mb-4">
                <Button outline onClick={this.toggleModal}>
                   <span className="fa fa-pencil fa-lg"></span> Submit Comment
                </Button>                       
@@ -95,7 +94,7 @@ function convertDate(date){
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     date = date.split('T')
     date = date[0].split('-')
-    const month = monthNames[date[1]]
+    const month = monthNames[parseInt(date[1])-1]
     const day = date[2]
     const year = date[0]
     const res = '' + month + ' ' + day + ' ' + year
@@ -151,7 +150,7 @@ const DishDetail = (props) => {
                     <div className='col-12 col-md-5 m-1'>
                         <b>Comments</b>
                         <RenderComments comments = {comment}/>
-                        <CommentForm/>
+                        <CommentForm addComment = {props.addComment} dishId={dishId}/>
                     </div>
                 </div>
             </div>
