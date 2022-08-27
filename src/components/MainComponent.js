@@ -8,7 +8,7 @@ import Footer from './FooterComponent';
 import Header from './HeaderComponent';
 import Home from './HomeComponent';
 import Menu from './MenuComponent';
-import { addComment,fetchDishes } from '../redux/ActionCreators';
+import { addComment,fetchComments,fetchDishes, fetchPromos } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
 
 // Creating a WithRouter with new functions as it is not supported in latest React Router Dom
@@ -31,6 +31,8 @@ const withRouter = (Component) => {
 const mapDispatchToProps = (dispatch) => ({
   addComment : (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
   fetchDishes : () => {dispatch(fetchDishes())},
+  fetchComments : () => {dispatch(fetchComments())},
+  fetchPromos : () => {dispatch(fetchPromos())},
   resetFeedbackForm : () => {dispatch(actions.reset('feedback'))}
 })
 // Redux Function to map State as props
@@ -50,6 +52,8 @@ class Main extends Component{
     }
     componentDidMount() {
       this.props.fetchDishes();
+      this.props.fetchComments();
+      this.props.fetchPromos();
     }
     render(){
         return(
@@ -58,14 +62,20 @@ class Main extends Component{
             <Routes>
                 <Route exact path="/home" element={ <Home dishes = {this.props.dishes.dishes} 
                                                leaders = {this.props.leaders} 
-                                               promotions = {this.props.promotions}
+                                               promotions = {this.props.promotions.promotions}
+                                               promosLoading = {this.props.promotions.isLoading}
+                                               promosErrMess = {this.props.promotions.errMess}
                                                dishesLoading = {this.props.dishes.isLoading}
                                                dishesErrMess = {this.props.dishes.errMess} /> } />
+
                 <Route path="*" element={<Home dishes = {this.props.dishes.dishes} 
-                                               leaders = {this.props.leaders} 
-                                               promotions = {this.props.promotions}
+                                               eaders = {this.props.leaders} 
+                                               promotions = {this.props.promotions.promotions}
+                                               promosLoading = {this.props.promotions.isLoading}
+                                               promosErrMess = {this.props.promotions.errMess}
                                                dishesLoading = {this.props.dishes.isLoading}
                                                dishesErrMess = {this.props.dishes.errMess} /> } />
+
                 <Route exact path='/menu' element={ <Menu dishes={this.props.dishes.dishes}
                                                           dishesLoading = {this.props.dishes.isLoading}
                                                           dishesErrMess = {this.props.dishes.errMess} /> } />
@@ -74,9 +84,11 @@ class Main extends Component{
 
                 <Route path='/menu/:dishId' element={ <DishDetail dishes ={this.props.dishes.dishes} 
                                                                  addComment={this.props.addComment}  
-                                                                 comments={this.props.comments}
+                                                                 comments={this.props.comments.comments}
                                                                  dishesLoading = {this.props.dishes.isLoading}
-                                                                 dishesErrMess = {this.props.dishes.errMess} /> } />
+                                                                 dishesErrMess = {this.props.dishes.errMess} 
+                                                                 commentsErrMess = {this.props.comments.errMess} />} />
+
                 <Route exact path='/contactus' element={ <Contact resetFeedbackForm={this.props.resetFeedbackForm} /> } />
             </Routes>
             <Footer/>
