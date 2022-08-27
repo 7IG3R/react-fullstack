@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem, Button, Card, CardBody, CardImg, CardText, CardTitle, Col, Label, Modal, ModalBody, ModalHeader, Row } from 'reactstrap';
 import { Control, LocalForm, Errors} from 'react-redux-form';
+import { Loading } from './LoadingComponent';
 
 
 const required = (val) => val && val.length;
@@ -127,10 +128,29 @@ function RenderDish({dish}){
 }
 
 const DishDetail = (props) => {
-    let {dishId} = useParams();
-    const dish = props.dishes.filter((dish) => dish.id == dishId)[0]
-    const comment = props.comments.filter((comment) => comment.dishId  == dishId)
-    if(dish != null){
+
+   let {dishId} = useParams();
+   const dish = props.dishes.filter((dish) => dish.id == dishId)[0]
+   const comment = props.comments.filter((comment) => comment.dishId  == dishId)
+    if(props.dishesLoading){
+      return( 
+         <div className='row'>
+            <div className='col-12'>
+               <Loading/>
+            </div>
+         </div>
+      );
+    }
+    else if(props.dishesErrMess) {
+      return( 
+         <div className='row'>
+            <div className='col-12'>
+               <h4>{props.dishesErrMess}</h4>
+            </div>
+         </div>
+      );
+    }
+    else if(dish != null){
         return(
             <div className='container'>
                 <div className='row'>
