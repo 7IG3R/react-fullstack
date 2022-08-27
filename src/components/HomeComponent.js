@@ -31,7 +31,6 @@ function RenderCard({item, isLoading, errMess}) {
 }
 
 function Home(props) {
-    console.log(props);
     const dish= props.dishes.filter((dish) => dish.featured)[0]
     const promotion = props.promotions.filter((promotion) => promotion.featured)[0]
     const leader = props.leaders.filter((leader) => leader.featured)[0]

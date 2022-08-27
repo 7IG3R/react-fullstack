@@ -1,27 +1,26 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl';
 
 
 function RenderLeader({leaders}){
        return leaders.map((leader) => {
         return (
-            <>
-            <div className='container row'>
-            <Media className='col-2'>
-                <Media object src={leader.image}/>
-            </Media>
-            <Media className='col-10'>
-                <Media body>
-                <Media heading>{leader.name}</Media>
-                    {leader.designation}<br/><br/>
-                    {leader.description}
-                    <br/>
-                    <br/>
+            <div className='container row' key={leader.id}>
+                <Media className='col-2'>
+                    <Media object src={baseUrl + leader.image}/>
                 </Media>
-            </Media>
+                <Media className='col-10'>
+                    <Media body>
+                    <Media heading>{leader.name}</Media>
+                        {leader.designation}<br/><br/>
+                        {leader.description}
+                        <br/>
+                        <br/>
+                    </Media>
+                </Media>
             </div>
-            </>
             
         );
     });
