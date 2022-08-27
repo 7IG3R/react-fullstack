@@ -8,7 +8,7 @@ import Footer from './FooterComponent';
 import Header from './HeaderComponent';
 import Home from './HomeComponent';
 import Menu from './MenuComponent';
-import { addComment,fetchComments,fetchDishes, fetchPromos } from '../redux/ActionCreators';
+import { postComment,fetchComments,fetchDishes, fetchPromos } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
 
 // Creating a WithRouter with new functions as it is not supported in latest React Router Dom
@@ -29,7 +29,7 @@ const withRouter = (Component) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addComment : (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
+  postComment : (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
   fetchDishes : () => {dispatch(fetchDishes())},
   fetchComments : () => {dispatch(fetchComments())},
   fetchPromos : () => {dispatch(fetchPromos())},
@@ -83,7 +83,7 @@ class Main extends Component{
                 <Route exact path='/aboutus' element={ <About leaders={this.props.leaders} /> } />
 
                 <Route path='/menu/:dishId' element={ <DishDetail dishes ={this.props.dishes.dishes} 
-                                                                 addComment={this.props.addComment}  
+                                                                 postComment={this.props.postComment}  
                                                                  comments={this.props.comments.comments}
                                                                  dishesLoading = {this.props.dishes.isLoading}
                                                                  dishesErrMess = {this.props.dishes.errMess} 

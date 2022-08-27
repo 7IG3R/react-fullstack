@@ -1,15 +1,50 @@
 import { baseUrl } from '../shared/baseUrl';
 import * as ActionTypes from './ActionTypes';
 
-export const addComment = (dishId, rating, author, comment ) => ({
+export const addComment = (comment ) => ({
     type : ActionTypes.ADD_COMMENT,
-    payload: {
-        dishId : dishId,
-        rating : rating,
-        author : author,
-        comment : comment
-    }
+    payload : comment
 });
+
+export const postComment = (dishId, rating, author, comment) => (dispatch) => {
+    const newComment = {
+        dishId: dishId,
+        rating: rating,
+        author: author,
+        comment: comment
+    };
+    newComment.date = new Date().toISOString();
+
+    return fetch(baseUrl + 'comments',{
+        method: 'POST',
+        body: JSON.stringify(newComment),
+        headers: {
+            'Content-Type': 'application/json '
+        },
+        credential: 'same-origin'
+    })
+            .then( response => { 
+                if ( response.ok ) {
+                    // If response is in valid codes then return response for next
+                    return response;
+                } else {
+                    var error = new Error('Error' + response.status + ' : ' + response.statusText);
+                    error.response = response;
+                    // Throw this error and catch it 
+                    throw error;
+                }
+            }, 
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess
+            })
+            .then(response => response.json())
+            .then(response => dispatch(addComment(response)))
+            .catch( error => {
+                console.log('Post Comment Error : ' + error.message);
+                alert('Comment not posted\n' + 'Error: ' + error.message);
+            })
+}
 
 export const fetchComments = () => (dispatch) => {
     return fetch(baseUrl + 'comments')

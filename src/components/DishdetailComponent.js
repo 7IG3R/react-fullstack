@@ -24,7 +24,7 @@ class CommentForm extends Component {
       this.setState({ isModalOpen: !this.state.isModalOpen });
    }
    handleSubmit(values) {
-      this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+      this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
       this.toggleModal();
    }
    render() {
@@ -106,12 +106,12 @@ function convertDate(date){
 function RenderComments({comments}){
     return comments.map((comment) => {
         return (
-            <>
+            <div key={comment.id}>
             <br/>
             {comment.comment}
             <br/><br/>
             -- {comment.author} , {convertDate(comment.date)}<br/>
-            </>
+            </div>
         )
     })
 }
@@ -129,7 +129,6 @@ function RenderDish({dish}){
 }
 
 const DishDetail = (props) => {
-
    let {dishId} = useParams();
    const dish = props.dishes.filter((dish) => dish.id == dishId)[0]
    const comment = props.comments.filter((comment) => comment.dishId  == dishId)
@@ -171,7 +170,7 @@ const DishDetail = (props) => {
                     <div className='col-12 col-md-5 m-1'>
                         <b>Comments</b>
                         <RenderComments comments = {comment}/>
-                        <CommentForm addComment = {props.addComment} dishId={dishId}/>
+                        <CommentForm postComment = {props.postComment} dishId={dishId}/>
                     </div>
                 </div>
             </div>
