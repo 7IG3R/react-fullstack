@@ -1,10 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle} from 'reactstrap';
+    CardTitle, CardSubtitle, Fade} from 'reactstrap';
 import { baseUrl } from '../shared/baseUrl';
 import { Loading } from './LoadingComponent';
-
+import { FadeTransform } from 'react-animation-components';
 function RenderCard({item, isLoading, errMess}) {
     if(isLoading){
         return(
@@ -31,11 +31,18 @@ function RenderCard({item, isLoading, errMess}) {
 }
 
 function Home(props) {
+    console.log(props);
     const dish= props.dishes.filter((dish) => dish.featured)[0]
     const promotion = props.promotions.filter((promotion) => promotion.featured)[0]
     const leader = props.leaders.filter((leader) => leader.featured)[0]
 
     return(
+        <>
+        <FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+            }}>
         <div className="container">
             <div className="row align-items-start">
                 <div className="col-12 col-md m-1">
@@ -55,6 +62,9 @@ function Home(props) {
                 </div>
             </div>
         </div>
+
+        </FadeTransform>
+        </>
     );
 }
 

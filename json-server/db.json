@@ -201,69 +201,6 @@
       "comment": "It's your birthday, we're gonna party!",
       "author": "25 Cent",
       "date": "2011-12-02T17:57:28.556094Z"
-    },
-    {
-      "dishId": "2",
-      "rating": "4",
-      "author": "Sasa",
-      "comment": "Seee",
-      "date": "2022-08-27T21:14:32.807Z",
-      "id": 20
-    },
-    {
-      "dishId": "2",
-      "rating": "4",
-      "author": "shakti",
-      "comment": "hello",
-      "date": "2022-08-27T21:19:39.992Z",
-      "id": 21
-    },
-    {
-      "dishId": "2",
-      "rating": "5",
-      "author": "Nice",
-      "comment": "Saurav",
-      "date": "2022-08-27T21:20:52.301Z",
-      "id": 22
-    },
-    {
-      "dishId": "2",
-      "rating": "2",
-      "author": "sad",
-      "comment": "sad",
-      "date": "2022-08-27T21:23:35.120Z",
-      "id": 23
-    },
-    {
-      "dishId": "2",
-      "rating": "4",
-      "author": "shajti",
-      "comment": "shas",
-      "date": "2022-08-27T21:28:48.622Z",
-      "id": 24
-    },
-    {
-      "dishId": "2",
-      "author": "nice",
-      "comment": "check",
-      "date": "2022-08-27T21:33:48.765Z",
-      "id": 25
-    },
-    {
-      "dishId": "2",
-      "rating": "3",
-      "author": "shakti",
-      "comment": "hello",
-      "date": "2022-08-27T21:36:32.817Z",
-      "id": 26
-    },
-    {
-      "dishId": "2",
-      "rating": "3",
-      "author": "asds",
-      "comment": "sadas",
-      "date": "2022-08-27T21:37:50.322Z",
-      "id": 27
     }
   ],
   "promotions": [
@@ -317,15 +254,15 @@
   ],
   "feedback": [
     {
-      "firstname": "fdas",
-      "lastname": "afds",
-      "telnum": "134113",
-      "email": "dafdads@daffas.dfdafd",
+      "firstname": "Saurav",
+      "lastname": "Saurav",
+      "telnum": "8409258741",
+      "email": "hello@shaktisaurav.com",
       "agree": true,
-      "contactType": "Email",
-      "message": "afadsfds",
-      "date": "2017-12-04T09:41:49.890Z",
-      "id": 1
+      "contactType": "Tel.",
+      "message": "hiii",
+      "date": "2022-08-27T23:56:06.767Z",
+      "id": 7
     }
   ]
 }

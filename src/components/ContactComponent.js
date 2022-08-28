@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-pascal-case */
 
 import React, { Component } from 'react';
+import { Control, Errors, Form } from 'react-redux-form';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, BreadcrumbItem, Button, Col, FormFeedback, FormGroup, Input, Label, Row } from 'reactstrap';
-import { Control, Form, Errors, actions} from 'react-redux-form';
+import { Breadcrumb, BreadcrumbItem, Button, Col, Label, Row } from 'reactstrap';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -17,8 +17,10 @@ class Contact extends Component{
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleSubmit(values) {
-        console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));
+        
+        console.log(values.email);
+        alert('Thankyou for your feedback! \n' + JSON.stringify(values));
+        this.props.postFeedback(values.firstname, values.lastname, values.telnum, values.email, values.agree, values.contactType, values.message);
         this.props.resetFeedbackForm();
         // event.preventDefault();
     }
