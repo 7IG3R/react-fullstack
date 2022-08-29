@@ -8,5 +8,8 @@
     "start": "node index"
   },
   "author": "Shakti Saurav",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express-generator": "^4.16.1"
+  }
 }

@@ -2,8 +2,9 @@
 
 # dependencies
 /Front-End-Web-Development-with-React/node_modules
-/node-express/node_modules
+/Server-side-Development-with-NodeJS-Express-and-MongoDB/node-express/node_modules
 /node_modules
+/Server-side-Development-with-NodeJS-Express-and-MongoDB/node_modules
 /.pnp
 .pnp.js
 
