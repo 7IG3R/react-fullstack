@@ -12,7 +12,7 @@
 /Server-side-Development-with-NodeJS-Express-and-MongoDB/node-mongoose/node_modules
 /.pnp
 .pnp.js
-
+db.json
 # testing
 /coverage
 
