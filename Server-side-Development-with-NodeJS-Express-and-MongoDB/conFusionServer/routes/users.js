@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+const Users = require('../models/user');
 var passport = require('passport');
 const bodyParser = require('body-parser');
 var User = require('../models/user');
@@ -60,4 +60,13 @@ router.get('/logout', (req, res) => {
   }
 });
 
+router.get('/', authenticate.verifyUser, authenticate.verifyAdmin, (req, res) => {
+  Users.find({})
+  .then((users) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(users);
+    }, (err) => next(err))
+    .catch((err) => next(err));
+});
 module.exports = router;
